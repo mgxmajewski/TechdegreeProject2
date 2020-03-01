@@ -86,6 +86,7 @@ that should be shown on the page, show it
          li.appendChild(a);
          a.textContent = i;
       }
+      
    /*
  1. Determine how many pages are needed for the list by dividing the
  total number of list items by the max number of items per page
@@ -101,7 +102,17 @@ that should be shown on the page, show it
 7. Add the active class to the link that was just clicked. You can identify that
 clicked link using event.target
 */
-}
+      const button = document.querySelector(".pagination");
+
+      button.addEventListener("click", e => { 
+         // e.preventDefault();
+         if (e.target.tagName === "A") {
+         pageNumber = parseInt(e.target.innerHTML);
+         showPage(list, pageNumber);
+         }
+      });
+   }
+      
 
 appendPageLinks(studentList);
 showPage(studentList, 1);
