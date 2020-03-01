@@ -15,10 +15,19 @@ FSJS project 2 - List Filter and Pagination
    going to create. A good general rule of thumb is if the variable 
    will only be used inside of a function, then it can be locally 
    scoped to that function.
+
+
+
+/***
+ Decided to use "var" for storing global variables
+https://codeburst.io/difference-between-var-let-and-const-in-javascript-fbce2fba7b4
+
+
+
 ***/
 
-
-
+var studentList = document.getElementsByClassName('student-item cf');
+var studentsPerPage = 10;
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -34,7 +43,14 @@ FSJS project 2 - List Filter and Pagination
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
+console.log(studentList);
 
+/***Loop over items in the list parameter
+-- If the index of a list item is >= the index of the first
+item that should be shown on the page
+-- && the list item index is <= the index of the last item
+that should be shown on the page, show it
+***/
 
 
 
@@ -42,7 +58,7 @@ FSJS project 2 - List Filter and Pagination
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
-
+showPage(studentList, 1);
 
 
 
