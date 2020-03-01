@@ -43,6 +43,15 @@ var studentsPerPage = 10;
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
+
+/***
+ * showPage function displays the right ammount of elements (declared in global variable),
+ * and hides the rest of content. The idea is to loop through all elemnts of selected HTML
+ * to establish is the "index" of each element in categopry hidden or displayed. To hide
+ * HTML elents they are styled by DOM manipulation ".style.display = 'none'", rest of elements
+ * are "uneffected" by loop execution.
+ */
+
 const showPage = (list, page) => {
 
    let firstStudent = (page * studentsPerPage) - studentsPerPage;
@@ -84,7 +93,8 @@ that should be shown on the page, show it
          const a = document.createElement('a');
          ul.appendChild(li);
          li.appendChild(a);
-         a.textContent = i;
+         a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
+         a.href = '#'; // this line is to get rid of bug of "text select" coursor - after this code it becomes "hand coursor" 
       }
       
    /*
@@ -105,9 +115,9 @@ clicked link using event.target
       const button = document.querySelector(".pagination");
 
       button.addEventListener("click", e => { 
-         // e.preventDefault();
+         // e.preventDefault(); - I added this function but it doesn't improve how app works 
          if (e.target.tagName === "A") {
-         pageNumber = parseInt(e.target.innerHTML);
+         pageNumber = e.target.innerHTML;
          showPage(list, pageNumber);
          }
       });
