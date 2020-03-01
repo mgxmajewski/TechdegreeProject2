@@ -80,7 +80,7 @@ that should be shown on the page, show it
 ***/
 
  const appendPageLinks = (list) => {
-   let pagNum = Math.ceil(list.length / studentsPerPage);
+   let pagNum = Math.ceil(list.length/studentsPerPage);
    let div = document.createElement('div');
    let ul = document.createElement('ul');
    
@@ -123,8 +123,23 @@ clicked link using event.target
       });
    }
       
+/***
+ * EXEED EXPECTATION PART
+ */
+
+ const searchBar = () => {
+    const header = document.querySelector(".page-header");
+   //  console.log(header);
+    const searchDiv = document.createElement('div');
+    const searchInput = document.createElement('input');
+    searchInput.type = "text";
+    header.appendChild(searchDiv);
+    searchDiv.appendChild(searchInput);
+   //  searchInput.type = text;
+
+};
 
 appendPageLinks(studentList);
 showPage(studentList, 1);
-
+searchBar();
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
