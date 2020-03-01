@@ -45,22 +45,32 @@ var studentsPerPage = 10;
 ***/
 console.log(studentList);
 
+
+const showPage = (list, page) => {
+
+   let firstStudent = (page * studentsPerPage) - studentsPerPage;
+   let lastStudent = page * studentsPerPage;
+
+   for (let i = 0; i < list.length; i++) {
+    if (i >= firstStudent && i < lastStudent) {
+     list[i].style.display = '';
+    } else {
+     list[i].style.display = 'none';
+      }
+   }
+};
+
 /***Loop over items in the list parameter
 -- If the index of a list item is >= the index of the first
 item that should be shown on the page
 -- && the list item index is <= the index of the last item
 that should be shown on the page, show it
 ***/
-
-
+showPage(studentList, 1);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
-showPage(studentList, 1);
-
-
-
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
