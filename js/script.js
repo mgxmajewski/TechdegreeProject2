@@ -43,9 +43,6 @@ var studentsPerPage = 10;
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
-console.log(studentList);
-
-
 const showPage = (list, page) => {
 
    let firstStudent = (page * studentsPerPage) - studentsPerPage;
@@ -66,7 +63,7 @@ item that should be shown on the page
 -- && the list item index is <= the index of the last item
 that should be shown on the page, show it
 ***/
-showPage(studentList, 1);
+
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -74,10 +71,21 @@ showPage(studentList, 1);
 ***/
 
  const appendPageLinks = (list) => {
-   let paginationNumber = Math.ceil(list / studentsPerPage);
-   let paginationDiv = document.createElement(div);
-   paginationDiv.className = 'pagination';
+   let pagNum = Math.ceil(list.length / studentsPerPage);
+   let div = document.createElement('div');
+   let ul = document.createElement('ul');
    
+   div.className = "pagination";
+   document.querySelector(".page").appendChild(div);
+   div.appendChild(ul);
+
+      for (let i = 1; i <= pagNum; i++) {
+         const li = document.createElement('li');
+         const a = document.createElement('a');
+         ul.appendChild(li);
+         li.appendChild(a);
+         a.textContent = i;
+      }
    /*
  1. Determine how many pages are needed for the list by dividing the
  total number of list items by the max number of items per page
@@ -95,5 +103,7 @@ clicked link using event.target
 */
 }
 
+appendPageLinks(studentList);
+showPage(studentList, 1);
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
