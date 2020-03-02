@@ -131,17 +131,11 @@ clicked link using event.target
     const header = document.querySelector(".page-header");
    //  console.log(header);
     const searchDiv = document.createElement('div');
-    searchDiv.className = "student-search";
     const searchInput = document.createElement('input');
-    const searchButton = document.createElement('button');
     searchInput.type = "text";
-    searchButton.type = "button";
     header.appendChild(searchDiv);
     searchDiv.appendChild(searchInput);
-    searchDiv.appendChild(searchButton);
-    searchButton.textContent = "Search";
-    
-
+   //  searchInput.type = text;
 
 };
 
