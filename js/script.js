@@ -96,32 +96,18 @@ const showPage = (list, page) => {
  * EXEED EXPECTATION PART
  */
 
-// let studentSearched = [];  
-const filter = (input, names) => {
-   
-   // console.log(input);
-   // console.log(names);
+
+var filter = (input, names) => {
+const studentSearched = [];  
    for (let i = 0; i < names.length; i++){
-      var searchedStudent = document.getElementsByClassName('student-item cf x');
-      names[i].style.display = '';
          if (input.value.length != 0 && names[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {
-            names[i].style.display = '';
-            // studentSearched.push(names[i]);
-            names[i].classList.add("x");
+            studentSearched.push(names[i]);
          } else if (input.value.length === 0) {
-            names[i].style.display = '';
-            names[i].classList.remove("x");
-         } else {
-            names[i].style.display = 'none';
-            names[i].classList.remove("x");
-         }
+         
+         } 
        }
-      //  console.log(studentSearched);
-      console.log(searchedStudent);
+      console.log(studentSearched);
    };
-
-
-
 
    searchButton.addEventListener('click', (event) => {
       event.preventDefault();
