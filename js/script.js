@@ -97,7 +97,15 @@ const showPage = (list, page) => {
  */
 
 //  const searchBar = input => {
-    
+// Add event 
+searchInput.addEventListener('keyup', filterNames)
+
+function filterNames(){
+   // getting value of inpuit
+   let filterValue = searchInput.value.toUpperCase();
+   console.log(filterValue);
+}
+
 // };
 
 appendPageLinks(studentList);
