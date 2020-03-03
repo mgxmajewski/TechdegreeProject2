@@ -96,80 +96,42 @@ const showPage = (list, page) => {
  * EXEED EXPECTATION PART
  */
 
-//  const searchBar = input => {
-// Add event 
-// searchInput.addEventListener('keyup', filterNames)
-
-// function filterNames(){
-//    // getting value of inpuit
-//    let filterValue = searchInput.value.toLowerCase();
-//    console.log(filterValue);
-//    // let studentNames = document.getElementsByClassName('student-details');
-//    // let names = studentNames.querySelectorAll();
-//    console.log(studentList);
-//       for (let i = 0; i < studentList.length ;i++){
-         
-//          console.log(a);
-//          if (studentList.toLowerCase().indexOf(filterValue) > -1){
-//             studentList[i].style.display = "";
-//          } else {
-//             studentList[i].style.display = "none";
-//          }
-//       }
-
-// }
-
-
-
+// let studentSearched = [];  
 const filter = (input, names) => {
-   console.log(input);
-   console.log(names);
-   let studentSearched = [];  
+   // console.log(input);
+   // console.log(names);
+   
    for (let i = 0; i < names.length; i++){
       names[i].style.display = '';
-      // names[i].HTMLElementObject.id = '';
          if (input.value.length != 0 && names[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {
             names[i].style.display = '';
             studentSearched.push(names[i]);
-            console.log(studentSearched);
-            // names[i].HTMLElementObject.id = 'searched';
+            names[i].classList.add("x");
          } else if (input.value.length === 0) {
             names[i].style.display = '';
          } else {
             names[i].style.display = 'none';
          }
-
        }
-       
+      //  console.log(studentSearched);
    };
-
-   // const studentsDisplayed = document.getElementById('searched');
-   // console.log(studentsDisplayed);
+   
    searchButton.addEventListener('click', (event) => {
       event.preventDefault();
-    
-      // Invoke your search function here - Arguments: search, tableCells
+      
+      // Invoke your search function here - Arguments: input, names
      filter (searchInput,studentList);
-  
-    
-    
       // Helpful log statement to test function
       console.log('Submit button is functional!');
     });
 
     searchInput.addEventListener('keyup', () => {
-
-      // Invoke your search function here - Arguments: search, tableCells
+      // Invoke your search function here - Arguments: input, names
     filter (searchInput,studentList);
-   
-    
       // Helpful log statement to test function
       console.log('Keyup event on the Search input is functional!');
     });
 
-// };
 
 appendPageLinks(studentList);
 showPage(studentList, 1);
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
