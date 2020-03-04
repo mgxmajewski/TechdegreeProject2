@@ -99,11 +99,6 @@ const showPage = (list, page) => {
 
 var filter = (input, names) => {
 const studentSearched = [];  
-const emptySearch = document.getElementsByClassName("emptySearch");
-if (emptySearch.length > 0){
-   emptySearch[0].remove();
-} 
-if (input)
    for (let i = 0; i < names.length; i++){
          if (input.value.length != 0 && names[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {
             studentSearched.push(names[i]);
@@ -111,10 +106,7 @@ if (input)
          
          } 
        }
-
       console.log(studentSearched);
-      appendPageLinks(studentSearched);
-      showPage(studentSearched, i +1);
    };
 
    searchButton.addEventListener('click', (event) => {
