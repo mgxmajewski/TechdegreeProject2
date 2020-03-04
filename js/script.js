@@ -4,12 +4,12 @@ FSJS project 2 - List Filter and Pagination
 ******************************************/
    
 /***
- Decided to use "var" for storing global variables 
+ Decided to use "const" for storing global variables 
 https://codeburst.io/difference-between-var-let-and-const-in-javascript-fbce2fba7b4
 ***/
 
-var studentList = document.getElementsByClassName('student-item cf');
-var studentsPerPage = 10;
+const studentList = document.getElementsByClassName('student-item cf');
+const studentsPerPage = 10;
 
 /** 
  * Creating SarchDiv, searchInput  and searchButton
@@ -45,9 +45,9 @@ const showPage = (list,page) => {
    let lastStudent = page * studentsPerPage;
    for (let i = 0; i < list.length; i++) {
     if (i >= firstStudent && i <= lastStudent) {
-     list[i].style.display = '';
+     list[i].style.display = ''; //DOM manipulation ".style.display = '', - keep displaying
     } else {
-     list[i].style.display = 'none';
+     list[i].style.display = 'none'; //DOM manipulation ".style.display = 'none'" - stop displaing
       }
    }
 };
@@ -137,5 +137,5 @@ if (studentSearched == 0){ // creating h2 to give masseg to user if no results
     filter (searchInput,studentList);
     });
 
-showPage(studentList, 1); // initial funbction exec 
-appendPageLinks(studentList); // initial funbction exec 
+showPage(studentList, 1); // initial function call
+appendPageLinks(studentList); // initial function call
