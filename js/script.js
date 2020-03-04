@@ -67,14 +67,14 @@ const showPage = (list,page) => {
    const ul = document.createElement('ul');
    // ul.classList.add("pagination");
    // console.log(button.length);
-      for (let i = 1; i <= pagNum; i++) { // here displayin right amount of pagination links (if there was sharp <= there would be also link for less than 10 results)
+      for (let i = 0; i < pagNum; i++) { // here displayin right amount of pagination links (if there was sharp <= there would be also link for less than 10 results)
          const li = document.createElement('li');
          const a = document.createElement('a');
          a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
          a.href = '#'; // this line is to get rid of bug of "text select" coursor - after this code it becomes "hand coursor" 
          ul.appendChild(li).appendChild(a); //appendin li and a
-         // a.textContent = i + 1; // here changing american numeration from array inot european notation
-         if (i===1) {
+         a.textContent = i + 1; // here changing american numeration from array inot european notation
+         if (i===0) {
             a.classList.add("active"); // seting class to style active link - first one one load
          }
       }
@@ -86,7 +86,7 @@ const showPage = (list,page) => {
                pagA[j].classList.remove("active"); // removing active class from all link so later only one will be active 'clicked one'
             }
          e.target.classList.add("active"); // seting class to style clicked link
-         showPage(list,i);   // this call by using "i" as parameter allows to display correct page after click fo search result
+         showPage(list, i+1);   // this call by using "i" as parameter allows to display correct page after click fo search result
          });
       }
       page[0].appendChild(div).appendChild(ul); // adding html elements
