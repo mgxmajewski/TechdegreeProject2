@@ -4,14 +4,12 @@ FSJS project 2 - List Filter and Pagination
 ******************************************/
    
 /***
- Decided to use "var" for storing global variables
+ Decided to use "var" for storing global variables 
 https://codeburst.io/difference-between-var-let-and-const-in-javascript-fbce2fba7b4
-but not sure is that Semantically correc?
 ***/
 
 var studentList = document.getElementsByClassName('student-item cf');
 var studentsPerPage = 10;
-
 
 /** 
  * Creating SarchDiv, searchInput  and searchButton
@@ -34,8 +32,6 @@ searchButton.type = "button";
 searchDiv.appendChild(searchButton);
 searchButton.textContent = "Search";
 
-
-
 /***
  * showPage function displays the right ammount of elements (declared in global variable),
  * and hides the rest of content. The idea is to loop through all elemnts of selected HTML
@@ -44,25 +40,21 @@ searchButton.textContent = "Search";
  * are "uneffected" by loop execution.
  */
 
-const showPage = (list, page) => {
-
+const showPage = (list,page) => {
    let firstStudent = (page * studentsPerPage) - studentsPerPage;
    let lastStudent = page * studentsPerPage;
-
    for (let i = 0; i < list.length; i++) {
-    if (i >= firstStudent && i < lastStudent) {
+    if (i >= firstStudent && i <= lastStudent) {
      list[i].style.display = '';
     } else {
      list[i].style.display = 'none';
       }
    }
 };
-
 /*** 
    Created the appendPageLinks function to generate, append, and add 
    functionality to the pagination buttons.
 ***/
-
  const appendPageLinks = (list) => {
    let pagNum = Math.ceil(list.length/studentsPerPage);
    const button = document.getElementsByClassName("pagination");
@@ -75,7 +67,7 @@ const showPage = (list, page) => {
    const ul = document.createElement('ul');
    // ul.classList.add("pagination");
    // console.log(button.length);
-      for (let i =  1; i < pagNum; i++) { // here displayin right amount of pagination links (if there was sharp <= there would be also link for less than 10 results)
+      for (let i = 1; i <= pagNum; i++) { // here displayin right amount of pagination links (if there was sharp <= there would be also link for less than 10 results)
          const li = document.createElement('li');
          const a = document.createElement('a');
          a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
@@ -86,24 +78,24 @@ const showPage = (list, page) => {
             a.classList.add("active"); // seting class to style active link - first one one load
          }
       }
-      
       const pagA = ul.querySelectorAll('a'); // seleting all a to manipulate thei display
       // console.log(pagA);  
-     
       for (let i = 0;  i < pagA.length; i++){
          pagA[i].addEventListener('click', (e) => {
             for (let j = 0; j < pagA.length; j++){
                pagA[j].classList.remove("active"); // removing active class from all link so later only one will be active 'clicked one'
             }
          e.target.classList.add("active"); // seting class to style clicked link
-         showPage(list, i + 1);   
+         showPage(list,i);   // this call by using "i" as parameter allows to display correct page after click fo search result
          });
       }
-      page[0].appendChild(div).appendChild(ul);
+      page[0].appendChild(div).appendChild(ul); // adding html elements
    };
     
 /***
- * EXEED EXPECTATION PART
+ * EXEED EXPECTATION PART - filtering students name. Key idea hewre is to create array and later so store matching names in it. This array will later
+ * let other already existed functions to run with this array as parameter. There is also solution for "no results situation".  
+ * It's important to add that functions appendPageLinks and showPage are called inside filter function as the scope od array is local.
  */
 
 var filter = (input, names) => { // usign two parameters input (from crated search input and names form studentnames list)
@@ -127,10 +119,10 @@ if (studentSearched == 0){ // creating h2 to give masseg to user if no results
       const noStudent = document.createElement('h2');
       noStudent.textContent = "No students found";
       noStudent.classList.add('emptySearch')
-      document.getElementsByClassName('page')[0].appendChild(noStudent);
+      document.getElementsByClassName('page')[0].appendChild(noStudent); // adding h2 if conditiopn was met - no results
       // console.log(noStudent);
 }
-      console.log(studentSearched);
+      // console.log(studentSearched);
       appendPageLinks(studentSearched); // running function with filtered names array
       showPage(studentSearched, 1); // running function with filtered names array
 }
@@ -144,7 +136,6 @@ if (studentSearched == 0){ // creating h2 to give masseg to user if no results
     searchInput.addEventListener('keyup', () => { // added search input keyup event listener 
     filter (searchInput,studentList);
     });
-
 
 showPage(studentList, 1); // initial funbction exec 
 appendPageLinks(studentList); // initial funbction exec 
