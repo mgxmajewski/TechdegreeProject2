@@ -103,18 +103,22 @@ const emptySearch = document.getElementsByClassName("emptySearch");
 if (emptySearch.length > 0){
    emptySearch[0].remove();
 } 
-if (input)
+if (input.value === "") {
+   appendPageLinks(studentList);
+   showPage(studentList, 1);
+} else {
    for (let i = 0; i < names.length; i++){
-         if (input.value.length != 0 && names[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {
+      const h3Student = document.getElementsByTagName('h3');
+      names[i].style.display = 'none';
+         if (input.value.length !== 0 && h3Student[i].textContent.toLowerCase().includes(input.value.toLowerCase())) { 
             studentSearched.push(names[i]);
-         } else if (input.value.length === 0) {
-         
          } 
        }
 
       console.log(studentSearched);
       appendPageLinks(studentSearched);
-      showPage(studentSearched, i +1);
+      showPage(studentSearched, 1);
+}
    };
 
    searchButton.addEventListener('click', (event) => {
