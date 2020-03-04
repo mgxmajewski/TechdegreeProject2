@@ -65,38 +65,38 @@ const showPage = (list, page) => {
 
  const appendPageLinks = (list) => {
    let pagNum = Math.ceil(list.length/studentsPerPage);
-  
    const button = document.getElementsByClassName("pagination");
    if (button.length > 0) {
       button[0].remove();
    }
-
    const div = document.createElement('div');
-   div.classList.add('pagination');
+   div.classList.add("pagination");
    const page = document.getElementsByClassName('page');
    const ul = document.createElement('ul');
-
-console.log(button.length);
-      for (let i = 1; i <= pagNum; i++) {
+   // ul.classList.add("pagination");
+   console.log(button.length);
+      for (let i =  0; i < pagNum; i++) {
          const li = document.createElement('li');
          const a = document.createElement('a');
-         ul.appendChild(li);
-         li.appendChild(a);
          a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
          a.href = '#'; // this line is to get rid of bug of "text select" coursor - after this code it becomes "hand coursor" 
-         if (i === 0) {
-            a.classList.add('active');
+         ul.appendChild(li).appendChild(a); //appendin li and a
+         a.textContent = i + 1; // here changing american numeration from array inot european notation
+         if (i===0) {
+            a.classList.add("active"); // setin class to style active link
          }
       }
+      
       const pagA = ul.querySelectorAll('a');
+      console.log(pagA);
      
       for (let i = 0;  i < pagA.length; i++){
          pagA[i].addEventListener('click', (e) => {
             for (let j = 0; j < pagA.length; j++){
-               pagA.classList.remove('active');
+               pagA[j].classList.remove("active");
             }
-         e.target.classList.add('active');
-         showPage(list, i+1);   
+         e.target.classList.add("active"); // setin class to style clicked link
+         showPage(list, i + 1);   
          });
       }
       page[0].appendChild(div).appendChild(ul);
@@ -106,45 +106,45 @@ console.log(button.length);
  * EXEED EXPECTATION PART
  */
 
-
-var filter = (input, names) => {
-const studentSearched = [];  
-const emptySearch = document.getElementsByClassName("emptySearch");
-if (emptySearch.length > 0){
+var filter = (input, names) => { // usign two parameters input (from crated search input and names form studentnames list)
+const studentSearched = []; // creating empty array to later accumulate filterted students 
+const emptySearch = document.getElementsByClassName("emptySearch"); // create class so later will be possible to claer each time iput changes
+if (emptySearch.length > 0){ // clearin search each new exec of filter
    emptySearch[0].remove();
 } 
-if (input.value === "") {
+if (input.value === "") { // diplayin init student list in case iput is empty string
    appendPageLinks(studentList);
    showPage(studentList, 1);
-} else {
-   for (let i = 0; i < names.length; i++){
-      const h3Student = document.getElementsByTagName('h3');
+} else { // HERE STARTS MAIN FILTERING ALGORITHM - in case input is not empty
+   for (let i = 0; i < names.length; i++){  //-looping through student list
+      const h3Student = document.getElementsByTagName('h3'); // selectin just students name (to not search over emails for example)
       names[i].style.display = 'none';
-         if (input.value.length !== 0 && h3Student[i].textContent.toLowerCase().includes(input.value.toLowerCase())) { 
-            studentSearched.push(names[i]);
+         if (input.value.length !== 0 && h3Student[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {  // this is the main algorithm to compare iput with name list
+            studentSearched.push(names[i]); // here pushing filtered names into array
          } 
        }
-if (studentSearched == 0){
+if (studentSearched == 0){ // creating h2 to give masseg to user if no results
       const noStudent = document.createElement('h2');
       noStudent.textContent = "No students found";
       noStudent.classList.add('emptySearch')
       document.getElementsByClassName('page')[0].appendChild(noStudent);
-      console.log(noStudent);
+      // console.log(noStudent);
 }
       console.log(studentSearched);
-      appendPageLinks(studentSearched);
-      showPage(studentSearched, 1);
+      appendPageLinks(studentSearched); // running function with filtered names array
+      showPage(studentSearched, 1); // running function with filtered names array
 }
    };
 
-   searchButton.addEventListener('click', (event) => {
+   searchButton.addEventListener('click', (event) => { // added search button click event listener 
       event.preventDefault();
      filter (searchInput,studentList);
     });
 
-    searchInput.addEventListener('keyup', () => {
+    searchInput.addEventListener('keyup', () => { // added search input keyup event listener 
     filter (searchInput,studentList);
     });
 
-showPage(studentList, 1);
-appendPageLinks(studentList);
+
+showPage(studentList, 1); // initial funbction exec 
+appendPageLinks(studentList); // initial funbction exec 
