@@ -41,10 +41,10 @@ searchButton.textContent = "Search";
  */
 
 const showPage = (list,page) => {
-   let firstStudent = (page * studentsPerPage) - studentsPerPage;
-   let lastStudent = page * studentsPerPage;
+   const firstStudent = (page * studentsPerPage) - studentsPerPage;
+   const lastStudent = page * studentsPerPage;
    for (let i = 0; i < list.length; i++) {
-    if (i >= firstStudent && i <= lastStudent) {
+    if (i >= firstStudent && i < lastStudent) {
      list[i].style.display = ''; //DOM manipulation ".style.display = '', - keep displaying
     } else {
      list[i].style.display = 'none'; //DOM manipulation ".style.display = 'none'" - stop displaing
@@ -56,7 +56,7 @@ const showPage = (list,page) => {
    functionality to the pagination buttons.
 ***/
  const appendPageLinks = (list) => {
-   let pagNum = Math.ceil(list.length/studentsPerPage);
+   const pagNum = Math.ceil(list.length/studentsPerPage);
    const button = document.getElementsByClassName("pagination");
    if (button.length > 0) { // removing all buttons bofore genereting them so they are not adding up after each interaction with site
       button[0].remove();
@@ -98,7 +98,7 @@ const showPage = (list,page) => {
  * It's important to add that functions appendPageLinks and showPage are called inside filter function as the scope od array is local.
  */
 
-var filter = (input, names) => { // usign two parameters input (from crated search input and names form studentnames list)
+const filter = (input, names) => { // usign two parameters input (from crated search input and names form studentnames list)
 const studentSearched = []; // creating empty array to later accumulate filterted students 
 const emptySearch = document.getElementsByClassName("emptySearch"); // create class so later will be possible to claer each time iput changes
 if (emptySearch.length > 0){ // clearin search each new exec of filter
