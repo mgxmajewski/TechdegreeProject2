@@ -114,7 +114,13 @@ if (input.value === "") {
             studentSearched.push(names[i]);
          } 
        }
-
+if (studentSearched == 0){
+      const noStudent = document.createElement('h2');
+      noStudent.textContent = "No students found";
+      noStudent.classList.add('emptySearch')
+      document.getElementsByClassName('page')[0].appendChild(noStudent);
+      console.log(noStudent);
+}
       console.log(studentSearched);
       appendPageLinks(studentSearched);
       showPage(studentSearched, 1);
@@ -126,15 +132,12 @@ if (input.value === "") {
       
       // Invoke your search function here - Arguments: input, names
      filter (searchInput,studentList);
-      // Helpful log statement to test function
+
       console.log('Submit button is functional!');
     });
 
     searchInput.addEventListener('keyup', () => {
-      // Invoke your search function here - Arguments: input, names
     filter (searchInput,studentList);
-      // Helpful log statement to test function
-      console.log('Keyup event on the Search input is functional!');
     });
 
 
