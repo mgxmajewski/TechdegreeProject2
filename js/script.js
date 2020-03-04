@@ -91,24 +91,40 @@ const showPage = (list, page) => {
          }
       });
    }
-      
+    
 /***
  * EXEED EXPECTATION PART
  */
 
-//  const searchBar = input => {
-// Add event 
-searchInput.addEventListener('keyup', filterNames)
 
-function filterNames(){
-   // getting value of inpuit
-   let filterValue = searchInput.value.toUpperCase();
-   console.log(filterValue);
-}
+var filter = (input, names) => {
+const studentSearched = [];  
+   for (let i = 0; i < names.length; i++){
+         if (input.value.length != 0 && names[i].textContent.toLowerCase().includes(input.value.toLowerCase())) {
+            studentSearched.push(names[i]);
+         } else if (input.value.length === 0) {
+         
+         } 
+       }
+      console.log(studentSearched);
+   };
 
-// };
+   searchButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      
+      // Invoke your search function here - Arguments: input, names
+     filter (searchInput,studentList);
+      // Helpful log statement to test function
+      console.log('Submit button is functional!');
+    });
+
+    searchInput.addEventListener('keyup', () => {
+      // Invoke your search function here - Arguments: input, names
+    filter (searchInput,studentList);
+      // Helpful log statement to test function
+      console.log('Keyup event on the Search input is functional!');
+    });
+
 
 appendPageLinks(studentList);
 showPage(studentList, 1);
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
