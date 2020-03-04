@@ -66,36 +66,36 @@ const showPage = (list, page) => {
  const appendPageLinks = (list) => {
    let pagNum = Math.ceil(list.length/studentsPerPage);
    const button = document.getElementsByClassName("pagination");
-   if (button.length > 0) {
+   if (button.length > 0) { // removing all buttons bofore genereting them so they are not adding up after each interaction with site
       button[0].remove();
    }
-   const div = document.createElement('div');
+   const div = document.createElement('div'); //creatin html elemnts and nesting them in right place so they can get already existing css
    div.classList.add("pagination");
    const page = document.getElementsByClassName('page');
    const ul = document.createElement('ul');
    // ul.classList.add("pagination");
-   console.log(button.length);
-      for (let i =  0; i < pagNum; i++) {
+   // console.log(button.length);
+      for (let i =  1; i < pagNum; i++) { // here displayin right amount of pagination links (if there was sharp <= there would be also link for less than 10 results)
          const li = document.createElement('li');
          const a = document.createElement('a');
          a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
          a.href = '#'; // this line is to get rid of bug of "text select" coursor - after this code it becomes "hand coursor" 
          ul.appendChild(li).appendChild(a); //appendin li and a
-         a.textContent = i + 1; // here changing american numeration from array inot european notation
-         if (i===0) {
-            a.classList.add("active"); // setin class to style active link
+         // a.textContent = i + 1; // here changing american numeration from array inot european notation
+         if (i===1) {
+            a.classList.add("active"); // seting class to style active link - first one one load
          }
       }
       
-      const pagA = ul.querySelectorAll('a');
-      console.log(pagA);
+      const pagA = ul.querySelectorAll('a'); // seleting all a to manipulate thei display
+      // console.log(pagA);  
      
       for (let i = 0;  i < pagA.length; i++){
          pagA[i].addEventListener('click', (e) => {
             for (let j = 0; j < pagA.length; j++){
-               pagA[j].classList.remove("active");
+               pagA[j].classList.remove("active"); // removing active class from all link so later only one will be active 'clicked one'
             }
-         e.target.classList.add("active"); // setin class to style clicked link
+         e.target.classList.add("active"); // seting class to style clicked link
          showPage(list, i + 1);   
          });
       }
