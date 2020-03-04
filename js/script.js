@@ -65,13 +65,18 @@ const showPage = (list, page) => {
 
  const appendPageLinks = (list) => {
    let pagNum = Math.ceil(list.length/studentsPerPage);
-   let div = document.createElement('div');
-   let ul = document.createElement('ul');
-   
-   div.className = "pagination";
-   document.querySelector(".page").appendChild(div);
-   div.appendChild(ul);
+  
+   const button = document.getElementsByClassName("pagination");
+   if (button.length > 0) {
+      button[0].remove();
+   }
 
+   const div = document.createElement('div');
+   div.classList.add('pagination');
+   const page = document.getElementsByClassName('page');
+   const ul = document.createElement('ul');
+
+console.log(button.length);
       for (let i = 1; i <= pagNum; i++) {
          const li = document.createElement('li');
          const a = document.createElement('a');
@@ -79,18 +84,23 @@ const showPage = (list, page) => {
          li.appendChild(a);
          a.textContent = i; // here we display correct number of each paginated page - also crucial value for directing to tight page after click
          a.href = '#'; // this line is to get rid of bug of "text select" coursor - after this code it becomes "hand coursor" 
-      }
-      
-      const button = document.querySelector(".pagination");
-
-      button.addEventListener("click", e => { 
-         // e.preventDefault(); - I added this function but it doesn't improve how app works so decided to coment it and probably get rid of it in final version
-         if (e.target.tagName === "A") {
-         pageNumber = e.target.innerHTML;
-         showPage(list, pageNumber);
+         if (i === 0) {
+            a.classList.add('active');
          }
-      });
-   }
+      }
+      const pagA = ul.querySelectorAll('a');
+     
+      for (let i = 0;  i < pagA.length; i++){
+         pagA[i].addEventListener('click', (e) => {
+            for (let j = 0; j < pagA.length; j++){
+               pagA.classList.remove('active');
+            }
+         e.target.classList.add('active');
+         showPage(list, i+1);   
+         });
+      }
+      page[0].appendChild(div).appendChild(ul);
+   };
     
 /***
  * EXEED EXPECTATION PART
@@ -129,18 +139,12 @@ if (studentSearched == 0){
 
    searchButton.addEventListener('click', (event) => {
       event.preventDefault();
-      
-      // Invoke your search function here - Arguments: input, names
      filter (searchInput,studentList);
-
-      console.log('Submit button is functional!');
     });
 
     searchInput.addEventListener('keyup', () => {
     filter (searchInput,studentList);
     });
 
-
-appendPageLinks(studentList);
 showPage(studentList, 1);
-///Git_hub_test_2
+appendPageLinks(studentList);
